@@ -1,25 +1,27 @@
 <?php
 
-use DI\ContainerBuilder;
-use Slim\App;
+use DI\Container;
+use DI\Bridge\Slim\Bridge as SlimAppFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$containerBuilder = new ContainerBuilder();
+$container = new Container();
 
-// Set up settings
-$containerBuilder->addDefinitions(__DIR__ . '/container.php');
+$settings = require __DIR__.'/settings.php';
 
-// Build PHP-DI Container instance
-$container = $containerBuilder->build();
+$settings($container);
 
-// Create App instance
-$app = $container->get(App::class);
-
-// Register routes
-(require __DIR__ . '/routes.php')($app);
+$app = SlimAppFactory::create($container);
 
 // Register middleware
-(require __DIR__ . '/middleware.php')($app);
+$middleware = require __DIR__ . '/middleware.php';
 
-return $app;
+$middleware($app);
+
+// Register routes
+$routes = require __DIR__ . '/routes.php';
+
+$routes($app);
+
+
+ $app->run();
