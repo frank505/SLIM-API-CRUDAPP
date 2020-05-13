@@ -1,6 +1,7 @@
 <?php
 
 use Slim\App;
+use DI\Container;
 
 
 return function (App $app) {
@@ -12,4 +13,14 @@ return function (App $app) {
     $settings["logErrors"],
     $settings["logErrorDetails"]
   );
+
+   
+
+  $capsule = new \Illuminate\Database\Capsule\Manager;
+  $capsule->addConnection($settings['db']);
+
+  $capsule->setAsGlobal();
+  $capsule->bootEloquent();
+
+
 };
