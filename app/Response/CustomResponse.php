@@ -55,6 +55,4 @@ class CustomResponse
             ->withStatus(404);
     }
 
-
-
 }

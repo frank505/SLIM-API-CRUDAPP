@@ -21,6 +21,8 @@ class GuestEntryController
 
     protected $customResponse;
 
+    protected $cors;
+
     public function __construct()
     {
         $this->validator = new Validator();
@@ -29,12 +31,10 @@ class GuestEntryController
 
         $this->customResponse = new CustomResponse();
 
-//        v::with('App\\Validation\\Rules');
     }
 
     public function createGuest(Request $request, Response $response)
     {
-
         $this->validator->validate($request,[
             "name"=>v::notEmpty(),
             "email"=>v::notEmpty()->email(),

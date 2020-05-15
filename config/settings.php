@@ -14,6 +14,7 @@ return function(ContainerInterface $container)
         'displayErrorDetails'=>true,
         'logErrors'=>true,
         'logErrorDetails'=>true,
+         "determineRouteBeforeAppMiddleware" => true,
         'db' => $db
       ];
     });
