@@ -20,6 +20,8 @@ return function (App $app) {
 
   $app->add(\App\Middleware\CorsMiddleWare::class);
 
+
+
     $app->addRoutingMiddleware();
 
   $capsule = new \Illuminate\Database\Capsule\Manager;

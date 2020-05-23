@@ -63,11 +63,11 @@ class GuestEntryController
 
 
 
-    public function viewGuest(Response $response)
+    public function viewGuests(Response $response)
     {
         $guestEntries = $this->guestsEntry->get();
 
-        return $this->customResponse->is200Response($guestEntries);
+        return $this->customResponse->is200Response($response,$guestEntries);
     }
 
 
@@ -92,7 +92,7 @@ class GuestEntryController
         {
             $responseMessage = $this->validator->errors;
 
-          return  $this->customResponse->is200Response($response,$responseMessage);
+          return  $this->customResponse->is422Response($response,$responseMessage);
         }
 
         $this->guestsEntry->where(["id"=>$id])->update([
@@ -103,7 +103,7 @@ class GuestEntryController
 
         $responseMessage = "guest entry data updated successfully";
 
-       return $this->customResponse->is200Response($responseMessage);
+       return $this->customResponse->is200Response($response,$responseMessage);
     }
 
 
@@ -114,7 +114,16 @@ class GuestEntryController
 
         $responseMessage = "guest entry data deleted successfully";
 
-        return $this->customResponse->is200Response($responseMessage);
+        return $this->customResponse->is200Response($response,$responseMessage);
+
+    }
+
+
+    public function countGuests(Response $response)
+    {
+        $guestCount = $this->guestsEntry->count();
+
+        return $this->customResponse->is200Response($response,$guestCount);
 
     }
 

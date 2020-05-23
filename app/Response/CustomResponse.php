@@ -11,7 +11,7 @@ class CustomResponse
 
     public function is200Response($response, $responseMessage)
     {
-       $responseMessage = json_encode(["success"=>true, "message"=>$responseMessage  ]);
+       $responseMessage = json_encode(["success"=>true, "response"=>$responseMessage  ]);
 
         $response->getBody()->write($responseMessage);
 
@@ -23,7 +23,7 @@ class CustomResponse
 
     public function is422Response($response,$responseMessage)
     {
-        $responseMessage = json_encode(["success"=>false, "message"=>$responseMessage  ]);
+        $responseMessage = json_encode(["success"=>false, "response"=>$responseMessage  ]);
 
         $response->getBody()->write($responseMessage);
 
@@ -34,7 +34,7 @@ class CustomResponse
 
     public function is500Response($response,$responseMessage)
     {
-        $responseMessage = json_encode(["success"=>false, "message"=>$responseMessage  ]);
+        $responseMessage = json_encode(["success"=>false, "response"=>$responseMessage  ]);
 
         $response->getBody()->write($responseMessage);
 
@@ -46,7 +46,7 @@ class CustomResponse
 
     public function is404Response($response, $responseMessage)
     {
-        $responseMessage = json_encode(["success"=>false, "message"=>$responseMessage  ]);
+        $responseMessage = json_encode(["success"=>false, "response"=>$responseMessage  ]);
 
         $response->getBody()->write($responseMessage);
 
